@@ -1,0 +1,141 @@
+.App {
+  text-align: center;
+  background-color: black;
+}
+
+body {
+  background-color: black !important;
+}
+
+.navbar {
+  z-index: 100;
+}
+.navbar-light {
+  background-color: transparent !important;
+}
+
+.navbar-nav a {
+  font-family: Helvetica;
+  font-size: 24px;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-right: 30px;
+}
+
+.navbar-light .navbar-brand {
+  color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-left: 30px;
+}
+.navbar-light .navbar-brand:hover {
+  color: red;
+}
+
+.navbar-light .navbar-nav .active > .nav-link,
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .nav-link.show,
+.navbar-light .navbar-nav .show > .nav-link {
+  color: #fff;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #fff;
+}
+
+.navbar-nav {
+  text-align: center;
+}
+
+.nav-link {
+  padding: 0.2rem 1rem;
+}
+
+.nav-link.active,
+.nav-link:focus,
+.nav-link.active,
+.nav-link:hover {
+  color: red !important;
+}
+
+.jumbotron {
+  background: url("img/jumbo.png");
+  height: 100vh;
+  color: white;
+  font-size: 2vw;
+}
+
+.jumbotron h1 {
+  font-size: 5vw;
+}
+
+.JumboButton {
+  background-color: crimson;
+  border-color: crimson;
+}
+
+.JumboButton:hover,
+.JumboButton:focus {
+  background-color: red;
+  border-color: red;
+}
+
+.container {
+  margin-top: 5%;
+  align-content: center;
+}
+
+.container h3 {
+  text-align: center;
+  margin: 0;
+  line-height: 1;
+  padding-bottom: 20px;
+  color: white;
+}
+
+.card-footer p {
+  color: white;
+  background-color: rgba(255, 0, 0) !important;
+}
+.card {
+  height: 370px;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 400px;
+  background-color: white;
+}
+
+.card-header {
+  background-color: red !important;
+}
+.card-header h3 {
+  color: white;
+}
+
+.login_btn {
+  color: white;
+  background-color: crimson;
+  width: 100px;
+}
+
+.login_btn:hover {
+  color: white;
+  background-color: red;
+}
+
+.input-group-prepend span {
+  width: 50px;
+  background-color: red;
+  color: white;
+  border: 0 !important;
+}
+
+input:focus {
+  outline: 0 0 0 0 !important;
+  box-shadow: 0 0 0 0 !important;
+}
+
+.remember {
+  color: black;
+}
