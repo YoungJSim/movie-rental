@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 
@@ -22,7 +22,6 @@ class Navi extends Component {
             <Link
               to="/"
               onClick={() => {
-                this.doLogout();
                 onLogout();
               }}
               class="nav-link"

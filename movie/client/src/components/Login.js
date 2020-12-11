@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 
 class Login extends Component {
@@ -10,7 +10,45 @@ class Login extends Component {
       id: "",
     };
   }
-  handleSubmit = () => {};
+  handleAccount = (mem_info) => {
+    console.log(mem_info);
+    fetch("http://localhost:5000/api/login", {
+      // fetch를 통해 Ajax통신을 한다.
+      method: "post", // 방식은 post
+      headers: {
+        "Content-Type": "application/json; charset=utf-8", // 헤더에서 본문 타입 설정
+      },
+      body: JSON.stringify(mem_info), // body에 json 데이터를 전송할 때에는 문자열로 변경해서 보내야한다.
+    })
+      .then(function (res) {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        if (!data[0]) {
+          alert("아이디/비밀번호가 다릅니다.");
+        } else if (data[0].CustomerID) {
+          this.setState({ id: mem_info });
+          this.doSignUp();
+        }
+      });
+  };
+
+  doSignUp = () => {
+    const { id } = this.state;
+    window.localStorage.setItem("id", id);
+    this.props.onLogin();
+    this.props.history.push("/");
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+    this.handleAccount({
+      Password: e.target.password.value,
+      Email: e.target.email.value,
+    });
+  };
   render() {
     return (
       <div class="container">
@@ -71,4 +109,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);

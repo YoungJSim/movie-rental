@@ -29,7 +29,8 @@ body {
   letter-spacing: 2px;
   margin-left: 30px;
 }
-.navbar-light .navbar-brand:hover {
+.navbar-light .navbar-brand:hover,
+.navbar-light .navbar-brand:focus {
   color: red;
 }
 
@@ -94,6 +95,11 @@ body {
   color: white;
 }
 
+.listHeader {
+  color: red;
+  text-align: left;
+}
+
 .card-footer p {
   color: white;
   background-color: rgba(255, 0, 0) !important;
@@ -106,6 +112,14 @@ body {
   background-color: white;
 }
 
+.poster {
+  height: 300px;
+  width: 222px;
+}
+.posterName {
+  color: white;
+  text-align: center;
+}
 .card-header {
   background-color: red !important;
 }
