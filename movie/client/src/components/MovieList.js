@@ -4,17 +4,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { Container } from "semantic-ui-react";
+import MovieCard from "./MovieCard";
 
 class MovieList extends Component {
   state = {
-    movie: [
-      { img: "", Name: "" },
-      { img: "", Name: "" },
-      { img: "", Name: "" },
-      { img: "", Name: "" },
-      { img: "", Name: "" },
-      { img: "", Name: "" },
-    ],
+    movie: [],
   };
 
   componentDidMount() {
@@ -40,32 +34,11 @@ class MovieList extends Component {
     };
     return (
       <Container>
-        <h5 className="listHeader">You are watching</h5>
+        <h4 className="listHeader">Movies</h4>
         <Slider {...settings}>
-          <div>
-            <img src={this.state.movie[0].img} className="poster" />
-            <p className="posterName">{this.state.movie[0].Name}</p>
-          </div>
-          <div>
-            <img src={this.state.movie[1].img} className="poster" />
-            <p className="posterName">{this.state.movie[1].Name}</p>
-          </div>
-          <div>
-            <img src={this.state.movie[2].img} className="poster" />
-            <p className="posterName">{this.state.movie[2].Name}</p>
-          </div>
-          <div>
-            <img src={this.state.movie[3].img} className="poster" />
-            <p className="posterName">{this.state.movie[3].Name}</p>
-          </div>
-          <div>
-            <img src={this.state.movie[4].img} className="poster" />
-            <p className="posterName">{this.state.movie[4].Name}</p>
-          </div>
-          <div>
-            <img src={this.state.movie[5].img} className="poster" />
-            <p className="posterName">{this.state.movie[5].Name}</p>
-          </div>
+          {this.state.movie.map((c) => {
+            return <MovieCard Name={c.Name} url={c.img} rating={c.rating} />;
+          })}
         </Slider>
       </Container>
     );
