@@ -7,6 +7,8 @@ import MovieList from "./components/MovieList";
 import Store from "./components/Store";
 import SignUp from "./components/SignUp";
 import { Login } from "./components/RouteIndex";
+import Setting from "./components/Setting";
+import Search from "./components/Search";
 import {
   BrowserRouter as Router,
   Route,
@@ -33,8 +35,8 @@ class App extends Component {
   };
 
   componentWillMount() {
-    const id = window.localStorage.getItem("id");
-    if (id) {
+    const Email = window.localStorage.getItem("Email");
+    if (Email) {
       this.onLogin();
     } else {
       this.onLogout();
@@ -54,6 +56,8 @@ class App extends Component {
               <Route path="/login" component={Login} />
               <Route path="/list" component={MovieList} />
               <Route path="/signup" component={SignUp} />
+              <Route path="/setting" component={Setting} />
+              <Route path="/search" component={Search} />
             </Switch>
           </Router>
         </Store.Provider>

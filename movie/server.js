@@ -61,4 +61,107 @@ app.get("/api/movies", (req, res) => {
   });
 });
 
+app.post("/api/AccountID", (req, res) => {
+  let sql =
+    "SELECT DISTINCT A.AccountID FROM Account as A,Customer as C WHERE C.Email=? AND C.CustomerID=A.CustomerID";
+  let Email = req.body.Email;
+  db.query(sql, Email, (err, rows, fields) => {
+    res.send(rows);
+  });
+});
+
+app.post("/api/enque", (req, res) => {
+  let sql = "INSERT INTO MovieQueue VALUES(?,?)";
+  let AccountID = req.body.AccountID;
+  let MovieID = req.body.MovieID;
+  let params = [AccountID, MovieID];
+  db.query(sql, params, (err, rows, fields) => {
+    res.send(rows);
+  });
+});
+
+app.post("/api/ordered", (req, res) => {
+  let sql =
+    "SELECT Movie.Name, Movie.img, Movie.rating FROM Orders, Movie WHERE Orders.ReturnDate IS NULL AND Orders.AccountID = ? AND Orders.MovieID = Movie.MovieID";
+  let ID = req.body.AccountID;
+  db.query(sql, ID, (err, rows, fields) => {
+    res.send(rows);
+  });
+});
+
+app.post("/api/queue", (req, res) => {
+  let sql =
+    "SELECT Movie.Name, Movie.img, Movie.rating FROM Movie, MovieQueue WHERE MovieQueue.AccountID = ? AND MovieQueue.MovieID = Movie.MovieID";
+  let ID = req.body.AccountID;
+  db.query(sql, ID, (err, rows, fields) => {
+    res.send(rows);
+  });
+});
+
+app.post("/api/setting", (req, res) => {
+  let sql =
+    "INSERT INTO ACCOUNT (CustomerID, AccountID, Type, MovieID) VALUES (?,?,?,?), (?,?,?,?), ON DUPLICATE KEY UPDATE ? = ?";
+  let CustomerID = req.body.CustomerID;
+  let AccountID = req.body.AccountID;
+  let Type = req.body.Type;
+  let MovieID = req.body.MovieID;
+  let params = [
+    CustomerID,
+    AccountID,
+    Type,
+    MovieID,
+    CustomerID,
+    AccountID,
+    Type,
+    MovieID,
+    "Type",
+    Type,
+  ];
+  db.query(sql, params, (err, rows, fields) => {
+    res.send(rows);
+  });
+});
+
+app.post("/api/searchType", (req, res) => {
+  let sql =
+    "SELECT Movie.Name, Movie.img, Movie.rating FROM Movie WHERE Type=?";
+  let Keyword = req.body.Keyword;
+  db.query(sql, Keyword, (err, rows, fields) => {
+    res.send(rows);
+  });
+});
+
+app.post("/api/searchName", (req, res) => {
+  let sql =
+    "SELECT Movie.Name, Movie.img, Movie.rating FROM Movie WHERE Name Like ?";
+  let Keyword = "%" + req.body.Keyword + "%";
+  db.query(sql, Keyword, (err, rows, fields) => {
+    res.send(rows);
+  });
+});
+
+app.post("/api/searchActor", (req, res) => {
+  let sql =
+    "SELECT Movie.Name, Movie.img, Movie.rating FROM Movie, Actor AS A WHERE A.Name = ? AND Movie.MovieID = A.MovieID";
+  let Keyword = req.body.Keyword;
+  db.query(sql, Keyword, (err, rows, fields) => {
+    res.send(rows);
+  });
+});
+
+app.post("/api/searchRating", (req, res) => {
+  let sql =
+    "SELECT Movie.Name, Movie.img, Movie.rating FROM Movie ORDER BY Rating DESC";
+  db.query(sql, (err, rows, fields) => {
+    res.send(rows);
+  });
+});
+
+app.post("/api/searchHot", (req, res) => {
+  let sql = "SELECT Name,img,rating FROM Movie ORDER BY numcopies desc";
+  db.query(sql, (err, rows, fields) => {
+    res.send(rows);
+  });
+});
+
 app.listen(port, () => console.log(`Listening on port ${port}`));

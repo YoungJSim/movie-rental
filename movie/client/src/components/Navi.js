@@ -2,11 +2,16 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Dropdown from "react-bootstrap/Dropdown";
 
 class Navi extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      keyword: "",
+    };
   }
 
   render() {
@@ -17,7 +22,22 @@ class Navi extends Component {
         <Link to="/" class="navbar-brand">
           Goguma
         </Link>
+
         <Nav className="ml-auto">
+          {logged ? (
+            <Link to="/search" class="nav-link">
+              Search
+            </Link>
+          ) : (
+            ""
+          )}
+          {logged ? (
+            <Link to="/setting" class="nav-link">
+              Setting
+            </Link>
+          ) : (
+            ""
+          )}
           {logged ? (
             <Link
               to="/"

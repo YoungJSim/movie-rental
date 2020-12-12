@@ -8,6 +8,7 @@ class Login extends Component {
 
     this.state = {
       id: "",
+      Email: "",
     };
   }
   handleAccount = (mem_info) => {
@@ -35,15 +36,15 @@ class Login extends Component {
   };
 
   doSignUp = () => {
-    const { id } = this.state;
-    window.localStorage.setItem("id", id);
+    const { Email } = this.state;
+    window.localStorage.setItem("Email", Email);
     this.props.onLogin();
     this.props.history.push("/");
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-
+    this.setState({ Email: e.target.email.value });
     this.handleAccount({
       Password: e.target.password.value,
       Email: e.target.email.value,

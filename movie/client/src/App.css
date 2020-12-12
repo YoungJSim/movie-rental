@@ -111,6 +111,14 @@ body {
   width: 400px;
   background-color: white;
 }
+.btn-outline-success {
+  color: red;
+  border-color: red;
+}
+.btn-outline-success:hover {
+  color: white;
+  background-color: red;
+}
 
 .poster {
   height: 300px;
