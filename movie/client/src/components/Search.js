@@ -34,6 +34,7 @@ class Search extends Component {
     this.doSearch({
       Keyword: this.state.keyword,
       Type: this.state.Type,
+      AccountID: window.localStorage.getItem("AccountID"),
     });
   };
   render() {
@@ -60,6 +61,7 @@ class Search extends Component {
                 <option value="Actor">Actor</option>
                 <option value="Rating">Sort with rating</option>
                 <option value="Hot">Sort with hot movies</option>
+                <option value="Personal">Maybe you likes..</option>
               </Form.Control>
             </Col>
             <Col xs={4}>

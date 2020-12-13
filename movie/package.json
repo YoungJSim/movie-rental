@@ -20,6 +20,7 @@
     "react-daum-postcode": "^2.0.2",
     "react-image-slider": "^0.1.0",
     "react-multi-carousel": "^2.5.5",
+    "react-rating-stars-component": "^2.2.0",
     "react-router-dom": "^5.2.0",
     "react-slick": "^0.27.13",
     "react-styled-carousel": "^0.5.1",

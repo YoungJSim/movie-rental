@@ -8,11 +8,32 @@ class Setting extends Component {
     super(props);
 
     this.state = {
-      id: "",
-      Email: "",
+      Type: "",
     };
   }
-
+  setAccount = (keyword) => {
+    console.log(keyword);
+    fetch("http://localhost:5000/api/setting", {
+      // fetch를 통해 Ajax통신을 한다.
+      method: "post", // 방식은 post
+      headers: {
+        "Content-Type": "application/json; charset=utf-8", // 헤더에서 본문 타입 설정
+      },
+      body: JSON.stringify(keyword), // body에 json 데이터를 전송할 때에는 문자열로 변경해서 보내야한다.
+    }).then(() => {
+      this.props.history.push("/");
+    });
+  };
+  handleAccount = (e) => {
+    e.preventDefault();
+    this.setAccount({
+      CustomerID: window.localStorage.getItem("CustomerID"),
+      AccountID: window.localStorage.getItem("AccountID"),
+      Type: this.state.Type,
+      MovieID1: "11",
+      MovieID2: "20",
+    });
+  };
   render() {
     return (
       <div class="container">
@@ -36,14 +57,16 @@ class Setting extends Component {
                       as="select"
                       className="mr-sm-2"
                       id="inlineFormCustomSelect"
-                      custom
+                      customonChange={(e) =>
+                        this.setState({ Type: e.target.value })
+                      }
                     >
                       <option value="1">Limited</option>
                       <option value="2">Unlimited</option>
                     </Form.Control>
                   </Col>
                   <Col xs="auto" className="my-1">
-                    <Button type="submit">Apply</Button>
+                    <Button onClick={this.handleAccount}>Apply</Button>
                   </Col>
                 </Form.Row>
                 <p>

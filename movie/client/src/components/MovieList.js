@@ -112,6 +112,7 @@ class MovieList extends Component {
                 rating={c.rating}
                 id={c.MovieID}
                 btn={false}
+                btn1={true}
               />
             );
           })}

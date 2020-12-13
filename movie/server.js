@@ -82,7 +82,7 @@ app.post("/api/enque", (req, res) => {
 
 app.post("/api/ordered", (req, res) => {
   let sql =
-    "SELECT Movie.Name, Movie.img, Movie.rating FROM Orders, Movie WHERE Orders.ReturnDate IS NULL AND Orders.AccountID = ? AND Orders.MovieID = Movie.MovieID";
+    "SELECT Movie.Name, Movie.img, Movie.rating, Movie.MovieID FROM Orders, Movie WHERE Orders.ReturnDate IS NULL AND Orders.AccountID = ? AND Orders.MovieID = Movie.MovieID";
   let ID = req.body.AccountID;
   db.query(sql, ID, (err, rows, fields) => {
     res.send(rows);
@@ -104,16 +104,17 @@ app.post("/api/setting", (req, res) => {
   let CustomerID = req.body.CustomerID;
   let AccountID = req.body.AccountID;
   let Type = req.body.Type;
-  let MovieID = req.body.MovieID;
+  let MovieID1 = req.body.MovieID1;
+  let MovieID2 = req.body.MovieID2;
   let params = [
     CustomerID,
     AccountID,
     Type,
-    MovieID,
+    MovieID1,
     CustomerID,
     AccountID,
     Type,
-    MovieID,
+    MovieID2,
     "Type",
     Type,
   ];
@@ -164,4 +165,23 @@ app.post("/api/searchHot", (req, res) => {
   });
 });
 
+app.post("/api/searchPersonal", (req, res) => {
+  let sql =
+    "SELECT DISTINCT B.Name, B.img, B.rating FROM Movie as A, Movie as B, Orders WHERE Orders.AccountID = ? AND Orders.MovieID=A.MovieID AND A.MovieID <> B.MovieID AND A.Type = B.Type";
+  let ID = req.body.AccountID;
+  db.query(sql, ID, (err, rows, fields) => {
+    res.send(rows);
+  });
+});
+
+app.post("/api/rating", (req, res) => {
+  let sql =
+    "UPDATE Movie SET rating = ((? +((NumCopies)*Rating))/(NumCopies+1)) WHERE MovieID = ?";
+  let ID = req.body.MovieID;
+  let rating = req.body.rating;
+  let params = [rating, ID];
+  db.query(sql, params, (err, rows, fields) => {
+    res.send(rows);
+  });
+});
 app.listen(port, () => console.log(`Listening on port ${port}`));

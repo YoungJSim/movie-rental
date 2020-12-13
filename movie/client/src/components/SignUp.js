@@ -20,7 +20,6 @@ export default class SignUp extends Component {
   doSignUp = () => {
     const { id } = this.state;
     window.localStorage.setItem("id", id);
-    this.props.onLogin();
     this.props.history.push("/");
   };
 
